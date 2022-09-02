@@ -1,0 +1,35 @@
+awsAccountID: "awsAccountID"
+awsProfileName: "awsProfileName"
+awsProfileRegion: "awsProfileRegion"
+
+app: "app-cdk"
+environment: "dev"
+version: "0.0.0"
+build: "0"
+
+vpcProps:
+  cidr: "172.31.0.0/16"
+  natGateways: 1
+
+databaseServiceProps:
+  username: "test"
+  defaultDatabaseName : "test"
+  backupRetention: 15
+  autoPause: 300
+
+bastionHostForwardProps:
+  ingressRules:
+    - address: "address"
+      port: 5432
+      name : "name"
+
+lambdaApiProps:
+  code: "lambda-api/Lambda.Api"
+  memorySize: 2048
+  timeout: 900
+  policies:
+   - "AWSLambda_FullAccess"
+   - "service-role/AWSLambdaVPCAccessExecutionRole"
+   - "AWSXrayWriteOnlyAccess"
+  variables:
+    webAppURL: "webAppURLTest"
